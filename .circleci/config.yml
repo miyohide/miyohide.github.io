@@ -15,4 +15,9 @@ jobs:
           key: miyohide-githubio-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      - run: bundle exec jekyll build
+      - run:
+          name: Deploy
+          command: |
+            chmod +x deploy.sh
+            ./deploy.sh
+            
