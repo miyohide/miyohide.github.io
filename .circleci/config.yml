@@ -1,0 +1,7 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ruby:2
+    steps:
+      - run: echo "hello world"
