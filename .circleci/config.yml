@@ -5,6 +5,14 @@ jobs:
       - image: ruby:2
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - miyohide-githubio-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - miyohide-githubio-{{ .Branch }}
       - run: gem install bundler --no-doc
       - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: miyohide-githubio-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       - run: bundle exec jekyll build
